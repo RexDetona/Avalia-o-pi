@@ -648,3 +648,46 @@ button:disabled {
 .btn-submit:disabled {
   background-color: var(--border-color);
 }
+
+/* Card concluído: borda direita verde e sombra sutil */
+.card.card-completed {
+  border-right: 5px solid var(--success);
+  box-shadow: 4px 2px 10px rgba(5, 150, 105, 0.14);
+  transition: border-right 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* Destaque visual quando o usuário é levado até a pergunta esquecida */
+@keyframes highlightPulse {
+  0% { background-color: #fef3c7; }
+  100% { background-color: transparent; }
+}
+
+.question-item.missing-highlight,
+.attendance-row.missing-highlight {
+  border-radius: var(--radius-sm);
+  padding: 0.5rem;
+  margin: -0.5rem;
+  border-left: 3px solid var(--warning);
+  animation: highlightPulse 2s ease-out;
+}
+
+/* Botão de atalho na barra inferior para ir até o item pendente */
+.btn-pending-jump {
+  width: 100%;
+  background-color: #fffbeb;
+  color: #b45309;
+  border: 1px solid #fcd34d;
+  font-weight: 700;
+  padding: 0.875rem;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  transition: background-color 0.2s;
+}
+
+.btn-pending-jump:active {
+  background-color: #fef3c7;
+}
