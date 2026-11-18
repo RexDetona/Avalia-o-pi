@@ -34,45 +34,35 @@ export default function Login({ onLoginSuccess, grupoPendente }) {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center px-5 py-8 bg-slate-100">
-      <div className="w-full max-w-md mx-auto bg-white rounded-2xl shadow-md p-6 border border-slate-200">
+    <div className="login-page">
+      <div className="login-card">
         {grupoPendente && (
-          <div className="mb-5 p-3 rounded-xl bg-blue-50 border border-blue-200 text-blue-800 text-xs text-center font-medium">
+          <div className="qr-banner">
             QR Code identificado! Selecione seu nome e digite a senha para abrir a ficha do grupo.
           </div>
         )}
 
-        <div className="flex flex-col items-center text-center mb-8">
-          <div className="w-14 h-14 bg-blue-600 text-white rounded-2xl flex items-center justify-center mb-3 shadow-sm">
+        <div className="login-header">
+          <div className="login-icon-box">
             <ClipboardCheck size={30} />
           </div>
-          <h1 className="text-xl font-bold text-slate-800">
-            Avaliação de Projetos Integradores
-          </h1>
-          <p className="text-sm text-slate-500 mt-1">
-            Selecione seu nome para acessar a ficha
-          </p>
+          <h1 className="login-title">Avaliação de Projetos Integradores</h1>
+          <p className="login-subtitle">Selecione seu nome para acessar a ficha</p>
         </div>
 
-        {erro && (
-          <div className="mb-4 p-3 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm">
-            {erro}
-          </div>
-        )}
+        {erro && <div className="alert-error">{erro}</div>}
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="form-stack">
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1.5">
-              Orientador / Avaliador
-            </label>
-            <div className="relative">
-              <UserCheck className="absolute left-3.5 top-3.5 text-slate-400 pointer-events-none" size={20} />
+            <label className="form-label">Orientador / Avaliador</label>
+            <div className="input-wrapper">
+              <UserCheck className="input-icon" size={20} />
               <select
                 required
                 disabled={carregandoLista}
                 value={orientadorId}
                 onChange={(e) => setOrientadorId(e.target.value)}
-                className="w-full pl-11 pr-4 py-3 text-base bg-white rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none disabled:bg-slate-100"
+                className="form-control"
               >
                 <option value="">
                   {carregandoLista ? 'Carregando nomes...' : '-- Selecione seu nome --'}
@@ -87,18 +77,16 @@ export default function Login({ onLoginSuccess, grupoPendente }) {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1.5">
-              Senha
-            </label>
-            <div className="relative">
-              <Lock className="absolute left-3.5 top-3.5 text-slate-400" size={20} />
+            <label className="form-label">Senha</label>
+            <div className="input-wrapper">
+              <Lock className="input-icon" size={20} />
               <input
                 type="password"
                 required
                 value={senha}
                 onChange={(e) => setSenha(e.target.value)}
                 placeholder="••••••••"
-                className="w-full pl-11 pr-4 py-3 text-base rounded-xl border border-slate-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none"
+                className="form-control"
               />
             </div>
           </div>
@@ -106,11 +94,11 @@ export default function Login({ onLoginSuccess, grupoPendente }) {
           <button
             type="submit"
             disabled={loading || carregandoLista || !orientadorId}
-            className="w-full mt-2 bg-blue-600 active:bg-blue-700 text-white font-semibold py-3.5 rounded-xl shadow-sm flex items-center justify-center gap-2 text-base transition disabled:opacity-60"
+            className="btn-primary"
           >
             {loading ? (
               <>
-                <Loader2 className="animate-spin" size={20} />
+                <Loader2 className="spin" size={20} />
                 Entrando...
               </>
             ) : (
